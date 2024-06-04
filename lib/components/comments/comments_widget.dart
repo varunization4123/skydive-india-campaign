@@ -368,6 +368,8 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                                                                         .override(
                                                                           fontFamily:
                                                                               FlutterFlowTheme.of(context).labelMediumFamily,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
                                                                           letterSpacing:
                                                                               0.0,
                                                                           useGoogleFonts:
@@ -400,6 +402,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                                                                               .labelSmall
                                                                               .override(
                                                                                 fontFamily: FlutterFlowTheme.of(context).labelSmallFamily,
+                                                                                color: FlutterFlowTheme.of(context).primaryText,
                                                                                 fontSize: 12.0,
                                                                                 letterSpacing: 0.0,
                                                                                 useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelSmallFamily),
@@ -414,6 +417,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
                                                                             .labelSmall
                                                                             .override(
                                                                               fontFamily: FlutterFlowTheme.of(context).labelSmallFamily,
+                                                                              color: FlutterFlowTheme.of(context).primaryText,
                                                                               letterSpacing: 0.0,
                                                                               useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).labelSmallFamily),
                                                                             ),

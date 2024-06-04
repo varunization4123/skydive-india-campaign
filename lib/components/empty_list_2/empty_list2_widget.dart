@@ -71,6 +71,7 @@ class _EmptyList2WidgetState extends State<EmptyList2Widget> {
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).labelMedium.override(
                     fontFamily: FlutterFlowTheme.of(context).labelMediumFamily,
+                    color: FlutterFlowTheme.of(context).primaryText,
                     letterSpacing: 0.0,
                     useGoogleFonts: GoogleFonts.asMap().containsKey(
                         FlutterFlowTheme.of(context).labelMediumFamily),

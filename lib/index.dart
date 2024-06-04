@@ -34,4 +34,4 @@ export '/updated_chat/chat_2_invite_users/chat2_invite_users_widget.dart'
     show Chat2InviteUsersWidget;
 export '/updated_chat/image_details/image_details_widget.dart'
     show ImageDetailsWidget;
-export '/pages/windy_view/windy_view_widget.dart' show WindyViewWidget;
+export '/pages/main_windy/main_windy_widget.dart' show MainWindyWidget;

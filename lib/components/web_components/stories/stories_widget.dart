@@ -496,7 +496,7 @@ class _StoriesWidgetState extends State<StoriesWidget> {
                                         Icon(
                                           Icons.mode_comment_outlined,
                                           color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
+                                              .primaryText,
                                           size: 24.0,
                                         ),
                                         Padding(
@@ -514,6 +514,9 @@ class _StoriesWidgetState extends State<StoriesWidget> {
                                                       FlutterFlowTheme.of(
                                                               context)
                                                           .labelMediumFamily,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
                                                   letterSpacing: 0.0,
                                                   useGoogleFonts: GoogleFonts
                                                           .asMap()

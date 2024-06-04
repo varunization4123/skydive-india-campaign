@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'side_nav_model.dart';
 export 'side_nav_model.dart';
 
@@ -78,13 +79,19 @@ class _SideNavWidgetState extends State<SideNavWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // Logo should go here.
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
-                  child: Icon(
-                    Icons.alternate_email_rounded,
-                    color: FlutterFlowTheme.of(context).info,
-                    size: 40.0,
+                  child: Text(
+                    'SIC',
+                    style: FlutterFlowTheme.of(context).displaySmall.override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).displaySmallFamily,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          fontSize: 48.0,
+                          letterSpacing: 0.0,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).displaySmallFamily),
+                        ),
                   ),
                 ),
                 Divider(
@@ -290,6 +297,76 @@ class _SideNavWidgetState extends State<SideNavWidget> {
                         padding: const EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.account_circle_outlined,
+                          color: widget.selectedNav == 3
+                              ? FlutterFlowTheme.of(context).info
+                              : FlutterFlowTheme.of(context).accent4,
+                          size: 24.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                MouseRegion(
+                  opaque: false,
+                  cursor: MouseCursor.defer ?? MouseCursor.defer,
+                  onEnter: ((event) async {
+                    setState(() => _model.mouseRegionHovered4 = true);
+                  }),
+                  onExit: ((event) async {
+                    setState(() => _model.mouseRegionHovered4 = false);
+                  }),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed(
+                        'main_windy',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: const TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.fade,
+                            duration: Duration(milliseconds: 0),
+                          ),
+                        },
+                      );
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.easeInOut,
+                      width: 48.0,
+                      height: 48.0,
+                      decoration: BoxDecoration(
+                        color: () {
+                          if (widget.selectedNav == 4) {
+                            return FlutterFlowTheme.of(context).accent1;
+                          } else if (_model.mouseRegionHovered4) {
+                            return FlutterFlowTheme.of(context).accent1;
+                          } else {
+                            return FlutterFlowTheme.of(context).primary;
+                          }
+                        }(),
+                        borderRadius: BorderRadius.circular(12.0),
+                        border: Border.all(
+                          color: valueOrDefault<Color>(
+                            () {
+                              if (widget.selectedNav == 4) {
+                                return FlutterFlowTheme.of(context).accent1;
+                              } else if (_model.mouseRegionHovered4) {
+                                return FlutterFlowTheme.of(context).accent1;
+                              } else {
+                                return FlutterFlowTheme.of(context).primary;
+                              }
+                            }(),
+                            FlutterFlowTheme.of(context).primary,
+                          ),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.water,
                           color: widget.selectedNav == 3
                               ? FlutterFlowTheme.of(context).info
                               : FlutterFlowTheme.of(context).accent4,

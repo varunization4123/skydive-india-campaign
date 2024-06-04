@@ -123,7 +123,7 @@ class _NavBarPageState extends State<NavBarPage> {
       'main_Feed': const MainFeedWidget(),
       'main_Chat': const MainChatWidget(),
       'main_Profile': const MainProfileWidget(),
-      'windy_view': const WindyViewWidget(),
+      'main_windy': const MainWindyWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -178,10 +178,10 @@ class _NavBarPageState extends State<NavBarPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.water,
+                Icons.ssid_chart_rounded,
                 size: 24.0,
               ),
-              label: 'Weather',
+              label: '--',
               tooltip: '',
             )
           ],

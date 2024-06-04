@@ -1,5 +1,4 @@
 import '/components/web_components/stories/stories_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'story_details_model.dart';
@@ -39,22 +38,19 @@ class _StoryDetailsWidgetState extends State<StoryDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Title(
-        title: 'storyDetails',
-        color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
-        child: Scaffold(
-          key: scaffoldKey,
-          backgroundColor: const Color(0xFF1A1F24),
-          body: SafeArea(
-            top: true,
-            child: wrapWithModel(
-              model: _model.storiesModel,
-              updateCallback: () => setState(() {}),
-              child: StoriesWidget(
-                initialIndex: widget.initialStoryIndex,
-              ),
-            ),
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: const Color(0xFF1A1F24),
+      body: SafeArea(
+        top: true,
+        child: wrapWithModel(
+          model: _model.storiesModel,
+          updateCallback: () => setState(() {}),
+          child: StoriesWidget(
+            initialIndex: widget.initialStoryIndex,
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

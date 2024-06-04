@@ -289,7 +289,7 @@ class _DeleteDialogWidgetState extends State<DeleteDialogWidget>
                             const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 12.0, 8.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Expanded(
                               child: Column(
@@ -300,7 +300,7 @@ class _DeleteDialogWidgetState extends State<DeleteDialogWidget>
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         12.0, 0.0, 0.0, 4.0),
                                     child: Text(
-                                      'Confirm Delete',
+                                      'Confirm Delete ?',
                                       textAlign: TextAlign.start,
                                       style: FlutterFlowTheme.of(context)
                                           .labelMedium
@@ -308,6 +308,8 @@ class _DeleteDialogWidgetState extends State<DeleteDialogWidget>
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
                                                     .labelMediumFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
                                             letterSpacing: 0.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(

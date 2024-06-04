@@ -85,9 +85,11 @@ class _ChatDetailsOverlayWidgetState extends State<ChatDetailsOverlayWidget> {
                     textScaler: MediaQuery.of(context).textScaler,
                     text: TextSpan(
                       children: [
-                        const TextSpan(
+                        TextSpan(
                           text: 'Group Chat ID: ',
-                          style: TextStyle(),
+                          style: TextStyle(
+                            color: FlutterFlowTheme.of(context).primaryText,
+                          ),
                         ),
                         TextSpan(
                           text: valueOrDefault<String>(

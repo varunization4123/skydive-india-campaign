@@ -264,11 +264,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           ),
         ),
         FFRoute(
-          name: 'windy_view',
-          path: '/windyView',
+          name: 'main_windy',
+          path: '/mainWindy',
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'windy_view')
-              : const WindyViewWidget(),
+              ? const NavBarPage(initialPage: 'main_windy')
+              : const MainWindyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

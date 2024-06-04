@@ -43,38 +43,35 @@ class _PostDetailsPageWidgetState extends State<PostDetailsPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Title(
-        title: 'postDetails_Page',
-        color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
-        child: Scaffold(
-          key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          body: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              wrapWithModel(
-                model: _model.sideNavModel,
-                updateCallback: () => setState(() {}),
-                child: const SideNavWidget(
-                  selectedNav: 1,
-                ),
-              ),
-              Expanded(
-                child: Align(
-                  alignment: const AlignmentDirectional(0.0, -1.0),
-                  child: wrapWithModel(
-                    model: _model.postDetailsBaseModel,
-                    updateCallback: () => setState(() {}),
-                    updateOnChange: true,
-                    child: PostDetailsBaseWidget(
-                      postRef: widget.postReference?.reference,
-                      userRef: widget.userRecord!,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+      body: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          wrapWithModel(
+            model: _model.sideNavModel,
+            updateCallback: () => setState(() {}),
+            child: const SideNavWidget(
+              selectedNav: 1,
+            ),
           ),
-        ));
+          Expanded(
+            child: Align(
+              alignment: const AlignmentDirectional(0.0, -1.0),
+              child: wrapWithModel(
+                model: _model.postDetailsBaseModel,
+                updateCallback: () => setState(() {}),
+                updateOnChange: true,
+                child: PostDetailsBaseWidget(
+                  postRef: widget.postReference?.reference,
+                  userRef: widget.userRecord!,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

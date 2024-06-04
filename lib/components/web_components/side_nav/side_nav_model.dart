@@ -11,6 +11,8 @@ class SideNavModel extends FlutterFlowModel<SideNavWidget> {
   bool mouseRegionHovered2 = false;
   // State field(s) for MouseRegion widget.
   bool mouseRegionHovered3 = false;
+  // State field(s) for MouseRegion widget.
+  bool mouseRegionHovered4 = false;
 
   @override
   void initState(BuildContext context) {}

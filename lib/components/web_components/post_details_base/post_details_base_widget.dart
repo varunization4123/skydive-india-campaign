@@ -477,7 +477,7 @@ class _PostDetailsBaseWidgetState extends State<PostDetailsBaseWidget>
                                         offIcon: Icon(
                                           Icons.favorite_border,
                                           color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
+                                              .primaryText,
                                           size: 25.0,
                                         ),
                                       ),
@@ -499,6 +499,9 @@ class _PostDetailsBaseWidgetState extends State<PostDetailsBaseWidget>
                                                 fontFamily:
                                                     FlutterFlowTheme.of(context)
                                                         .labelMediumFamily,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
                                                 letterSpacing: 0.0,
                                                 useGoogleFonts: GoogleFonts
                                                         .asMap()
@@ -518,7 +521,7 @@ class _PostDetailsBaseWidgetState extends State<PostDetailsBaseWidget>
                                     Icon(
                                       Icons.mode_comment_outlined,
                                       color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
+                                          .primaryText,
                                       size: 24.0,
                                     ),
                                     Padding(
@@ -539,6 +542,9 @@ class _PostDetailsBaseWidgetState extends State<PostDetailsBaseWidget>
                                               fontFamily:
                                                   FlutterFlowTheme.of(context)
                                                       .labelMediumFamily,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               letterSpacing: 0.0,
                                               useGoogleFonts: GoogleFonts
                                                       .asMap()
@@ -558,8 +564,8 @@ class _PostDetailsBaseWidgetState extends State<PostDetailsBaseWidget>
                               children: [
                                 Icon(
                                   Icons.ios_share,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
                                   size: 24.0,
                                 ),
                               ],
@@ -805,6 +811,9 @@ class _PostDetailsBaseWidgetState extends State<PostDetailsBaseWidget>
                                                                     fontFamily:
                                                                         FlutterFlowTheme.of(context)
                                                                             .labelLargeFamily,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryText,
                                                                     letterSpacing:
                                                                         0.0,
                                                                     useGoogleFonts: GoogleFonts
@@ -842,6 +851,8 @@ class _PostDetailsBaseWidgetState extends State<PostDetailsBaseWidget>
                                                                         .override(
                                                                           fontFamily:
                                                                               FlutterFlowTheme.of(context).labelSmallFamily,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
                                                                           letterSpacing:
                                                                               0.0,
                                                                           useGoogleFonts:
@@ -860,6 +871,8 @@ class _PostDetailsBaseWidgetState extends State<PostDetailsBaseWidget>
                                                                       .override(
                                                                         fontFamily:
                                                                             FlutterFlowTheme.of(context).labelSmallFamily,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryText,
                                                                         letterSpacing:
                                                                             0.0,
                                                                         useGoogleFonts:

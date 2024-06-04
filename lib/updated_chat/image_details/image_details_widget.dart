@@ -105,214 +105,171 @@ class _ImageDetailsWidgetState extends State<ImageDetailsWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Title(
-        title: 'image_Details',
-        color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
-        child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            appBar: responsiveVisibility(
-              context: context,
-              tabletLandscape: false,
-              desktop: false,
-            )
-                ? AppBar(
-                    backgroundColor:
-                        FlutterFlowTheme.of(context).secondaryBackground,
-                    automaticallyImplyLeading: false,
-                    leading: FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30.0,
-                      borderWidth: 1.0,
-                      buttonSize: 60.0,
-                      icon: Icon(
-                        Icons.arrow_back_rounded,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 30.0,
+    return GestureDetector(
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        appBar: responsiveVisibility(
+          context: context,
+          tabletLandscape: false,
+          desktop: false,
+        )
+            ? AppBar(
+                backgroundColor:
+                    FlutterFlowTheme.of(context).secondaryBackground,
+                automaticallyImplyLeading: false,
+                leading: FlutterFlowIconButton(
+                  borderColor: Colors.transparent,
+                  borderRadius: 30.0,
+                  borderWidth: 1.0,
+                  buttonSize: 60.0,
+                  icon: Icon(
+                    Icons.arrow_back_rounded,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    size: 30.0,
+                  ),
+                  onPressed: () async {
+                    context.pop();
+                  },
+                ),
+                actions: const [],
+                centerTitle: false,
+                elevation: 0.0,
+              )
+            : null,
+        body: SafeArea(
+          top: true,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Hero(
+                    tag: widget.chatMessage!.image,
+                    transitionOnUserGestures: true,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: CachedNetworkImage(
+                        fadeInDuration: const Duration(milliseconds: 500),
+                        fadeOutDuration: const Duration(milliseconds: 500),
+                        imageUrl: widget.chatMessage!.image,
+                        width: double.infinity,
+                        fit: BoxFit.fitWidth,
+                        memCacheWidth: 1200,
+                        memCacheHeight: 1200,
                       ),
-                      onPressed: () async {
-                        context.pop();
-                      },
                     ),
-                    actions: const [],
-                    centerTitle: false,
-                    elevation: 0.0,
-                  )
-                : null,
-            body: SafeArea(
-              top: true,
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Hero(
-                        tag: widget.chatMessage!.image,
-                        transitionOnUserGestures: true,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: CachedNetworkImage(
-                            fadeInDuration: const Duration(milliseconds: 500),
-                            fadeOutDuration: const Duration(milliseconds: 500),
-                            imageUrl: widget.chatMessage!.image,
-                            width: double.infinity,
-                            fit: BoxFit.fitWidth,
-                            memCacheWidth: 1200,
-                            memCacheHeight: 1200,
+                  ).animateOnPageLoad(
+                      animationsMap['imageOnPageLoadAnimation']!),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 32.0),
+                child: FutureBuilder<UsersRecord>(
+                  future: FFAppState().userDocQuery(
+                    uniqueQueryKey: widget.chatMessage?.reference.id,
+                    requestFn: () =>
+                        UsersRecord.getDocumentOnce(widget.chatMessage!.user!),
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
                           ),
                         ),
-                      ).animateOnPageLoad(
-                          animationsMap['imageOnPageLoadAnimation']!),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 32.0),
-                    child: FutureBuilder<UsersRecord>(
-                      future: FFAppState().userDocQuery(
-                        uniqueQueryKey: widget.chatMessage?.reference.id,
-                        requestFn: () => UsersRecord.getDocumentOnce(
-                            widget.chatMessage!.user!),
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
+                      );
+                    }
+                    final otherUserUsersRecord = snapshot.data!;
+                    return Row(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 4.0, 8.0, 16.0),
+                          child: Container(
+                            width: 36.0,
+                            height: 36.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).accent1,
+                              borderRadius: BorderRadius.circular(10.0),
+                              shape: BoxShape.rectangle,
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 2.0,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: CachedNetworkImage(
+                                  fadeInDuration: const Duration(milliseconds: 200),
+                                  fadeOutDuration: const Duration(milliseconds: 200),
+                                  imageUrl: otherUserUsersRecord.photoUrl,
+                                  width: 44.0,
+                                  height: 44.0,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                          );
-                        }
-                        final otherUserUsersRecord = snapshot.data!;
-                        return Row(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 4.0, 8.0, 16.0),
-                              child: Container(
-                                width: 36.0,
-                                height: 36.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).accent1,
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  shape: BoxShape.rectangle,
-                                  border: Border.all(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    width: 2.0,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: CachedNetworkImage(
-                                      fadeInDuration:
-                                          const Duration(milliseconds: 200),
-                                      fadeOutDuration:
-                                          const Duration(milliseconds: 200),
-                                      imageUrl: otherUserUsersRecord.photoUrl,
-                                      width: 44.0,
-                                      height: 44.0,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Flexible(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 8.0),
-                                child: Column(
+                          ),
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 8.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
                                   mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        SelectionArea(
-                                            child: AutoSizeText(
-                                          otherUserUsersRecord.displayName,
-                                          textAlign: TextAlign.start,
-                                          style: FlutterFlowTheme.of(context)
-                                              .titleSmall
-                                              .override(
-                                                fontFamily:
+                                    SelectionArea(
+                                        child: AutoSizeText(
+                                      otherUserUsersRecord.displayName,
+                                      textAlign: TextAlign.start,
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmallFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .titleSmallFamily,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .titleSmallFamily),
-                                                lineHeight: 1.5,
-                                              ),
-                                        )),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
-                                          child: Text(
-                                            dateTimeFormat('relative',
-                                                widget.chatMessage!.timestamp!),
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelSmall
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelSmallFamily,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelSmallFamily),
-                                                ),
+                                                        .titleSmallFamily),
+                                            lineHeight: 1.5,
                                           ),
-                                        ),
-                                      ].divide(const SizedBox(width: 4.0)),
-                                    ),
+                                    )),
                                     Padding(
                                       padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 4.0, 0.0, 0.0),
-                                      child: SelectionArea(
-                                          child: AutoSizeText(
-                                        valueOrDefault<String>(
-                                          widget.chatMessage?.text,
-                                          '--',
-                                        ),
-                                        textAlign: TextAlign.start,
+                                      child: Text(
+                                        dateTimeFormat('relative',
+                                            widget.chatMessage!.timestamp!),
                                         style: FlutterFlowTheme.of(context)
-                                            .labelLarge
+                                            .labelSmall
                                             .override(
                                               fontFamily:
                                                   FlutterFlowTheme.of(context)
-                                                      .labelLargeFamily,
+                                                      .labelSmallFamily,
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryText,
@@ -322,25 +279,53 @@ class _ImageDetailsWidgetState extends State<ImageDetailsWidget>
                                                   .containsKey(
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .labelLargeFamily),
-                                              lineHeight: 1.5,
+                                                          .labelSmallFamily),
                                             ),
-                                      )),
+                                      ),
                                     ),
-                                  ],
+                                  ].divide(const SizedBox(width: 4.0)),
                                 ),
-                              ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 4.0, 0.0, 0.0),
+                                  child: SelectionArea(
+                                      child: AutoSizeText(
+                                    valueOrDefault<String>(
+                                      widget.chatMessage?.text,
+                                      '--',
+                                    ),
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelLargeFamily,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLargeFamily),
+                                          lineHeight: 1.5,
+                                        ),
+                                  )),
+                                ),
+                              ],
                             ),
-                          ],
-                        ).animateOnPageLoad(
-                            animationsMap['rowOnPageLoadAnimation']!);
-                      },
-                    ),
-                  ),
-                ],
+                          ),
+                        ),
+                      ],
+                    ).animateOnPageLoad(
+                        animationsMap['rowOnPageLoadAnimation']!);
+                  },
+                ),
               ),
-            ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

@@ -65,284 +65,215 @@ class _Chat2DetailsWidgetState extends State<Chat2DetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Title(
-        title: 'chat_2_Details',
-        color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
-        child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            appBar: responsiveVisibility(
-              context: context,
-              tabletLandscape: false,
-              desktop: false,
-            )
-                ? AppBar(
-                    backgroundColor:
-                        FlutterFlowTheme.of(context).primaryBackground,
-                    automaticallyImplyLeading: false,
-                    leading: FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30.0,
-                      borderWidth: 1.0,
-                      buttonSize: 60.0,
-                      icon: Icon(
-                        Icons.arrow_back_rounded,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 30.0,
-                      ),
-                      onPressed: () async {
-                        context.goNamed(
-                          'main_Chat',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.leftToRight,
-                              duration: Duration(milliseconds: 230),
-                            ),
-                          },
-                        );
+    return GestureDetector(
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        appBar: responsiveVisibility(
+          context: context,
+          tabletLandscape: false,
+          desktop: false,
+        )
+            ? AppBar(
+                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+                automaticallyImplyLeading: false,
+                leading: FlutterFlowIconButton(
+                  borderColor: Colors.transparent,
+                  borderRadius: 30.0,
+                  borderWidth: 1.0,
+                  buttonSize: 60.0,
+                  icon: Icon(
+                    Icons.arrow_back_rounded,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    size: 30.0,
+                  ),
+                  onPressed: () async {
+                    context.goNamed(
+                      'main_Chat',
+                      extra: <String, dynamic>{
+                        kTransitionInfoKey: const TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.leftToRight,
+                          duration: Duration(milliseconds: 230),
+                        ),
                       },
-                    ),
-                    title: FutureBuilder<UsersRecord>(
-                      future: UsersRecord.getDocumentOnce(widget.chatRef!.users
-                          .where((e) => e != currentUserReference)
-                          .toList()
-                          .first),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50.0,
-                              height: 50.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
-                                ),
-                              ),
+                    );
+                  },
+                ),
+                title: FutureBuilder<UsersRecord>(
+                  future: UsersRecord.getDocumentOnce(widget.chatRef!.users
+                      .where((e) => e != currentUserReference)
+                      .toList()
+                      .first),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
                             ),
-                          );
-                        }
-                        final conditionalBuilderUsersRecord = snapshot.data!;
-                        return Builder(
-                          builder: (context) {
-                            if (widget.chatRef!.users.length <= 2) {
-                              return Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  if (conditionalBuilderUsersRecord.photoUrl !=
-                                          '')
-                                    Align(
-                                      alignment:
-                                          const AlignmentDirectional(-1.0, -1.0),
+                          ),
+                        ),
+                      );
+                    }
+                    final conditionalBuilderUsersRecord = snapshot.data!;
+                    return Builder(
+                      builder: (context) {
+                        if (widget.chatRef!.users.length <= 2) {
+                          return Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              if (conditionalBuilderUsersRecord.photoUrl != '')
+                                Align(
+                                  alignment: const AlignmentDirectional(-1.0, -1.0),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 12.0, 0.0),
+                                    child: Container(
+                                      width: 44.0,
+                                      height: 44.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent1,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        shape: BoxShape.rectangle,
+                                        border: Border.all(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          width: 2.0,
+                                        ),
+                                      ),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 12.0, 0.0),
-                                        child: Container(
-                                          width: 44.0,
-                                          height: 44.0,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .accent1,
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            shape: BoxShape.rectangle,
-                                            border: Border.all(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              width: 2.0,
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: Image.network(
-                                                conditionalBuilderUsersRecord
-                                                    .photoUrl,
-                                                width: 44.0,
-                                                height: 44.0,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.network(
+                                            conditionalBuilderUsersRecord
+                                                .photoUrl,
+                                            width: 44.0,
+                                            height: 44.0,
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),
                                     ),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          valueOrDefault<String>(
-                                            conditionalBuilderUsersRecord
-                                                .displayName,
-                                            'Ghost User',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge
-                                              .override(
-                                                fontFamily:
+                                  ),
+                                ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      valueOrDefault<String>(
+                                        conditionalBuilderUsersRecord
+                                            .displayName,
+                                        'Ghost User',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLargeFamily,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyLargeFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyLargeFamily),
-                                              ),
+                                                        .bodyLargeFamily),
+                                          ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 4.0, 0.0, 0.0),
+                                      child: AutoSizeText(
+                                        valueOrDefault<String>(
+                                          conditionalBuilderUsersRecord.email,
+                                          'casper@ghost.io',
+                                        ).maybeHandleOverflow(
+                                          maxChars: 40,
+                                          replacement: '…',
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
-                                          child: AutoSizeText(
-                                            valueOrDefault<String>(
-                                              conditionalBuilderUsersRecord
-                                                  .email,
-                                              'casper@ghost.io',
-                                            ).maybeHandleOverflow(
-                                              maxChars: 40,
-                                              replacement: '…',
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelSmall
-                                                .override(
-                                                  fontFamily:
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelSmall
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelSmallFamily,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .labelSmallFamily,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelSmallFamily),
-                                                ),
-                                            minFontSize: 10.0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              );
-                            } else {
-                              return Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 4.0, 12.0, 4.0),
-                                    child: SizedBox(
-                                      width: 54.0,
-                                      height: 44.0,
-                                      child: Stack(
-                                        children: [
-                                          Align(
-                                            alignment:
-                                                const AlignmentDirectional(1.0, 1.0),
-                                            child: FutureBuilder<UsersRecord>(
-                                              future: UsersRecord
-                                                  .getDocumentOnce(widget
-                                                      .chatRef!.users
-                                                      .where((e) =>
-                                                          e !=
-                                                          currentUserReference)
-                                                      .toList()
-                                                      .last),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50.0,
-                                                      height: 50.0,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        valueColor:
-                                                            AlwaysStoppedAnimation<
-                                                                Color>(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                                final secondUserUsersRecord =
-                                                    snapshot.data!;
-                                                return Container(
-                                                  width: 32.0,
-                                                  height: 32.0,
-                                                  decoration: BoxDecoration(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .accent1,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                    shape: BoxShape.rectangle,
-                                                    border: Border.all(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      width: 2.0,
-                                                    ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(2.0),
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                      child: CachedNetworkImage(
-                                                        fadeInDuration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    300),
-                                                        fadeOutDuration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    300),
-                                                        imageUrl:
-                                                            valueOrDefault<
-                                                                String>(
-                                                          secondUserUsersRecord
-                                                              .photoUrl,
-                                                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/teams/GzvajSxrHvi1zwJQsfLk/assets/tjm1k7ywi5dr/@3xlogoMark_outlineOnWhite.png',
-                                                        ),
-                                                        width: 44.0,
-                                                        height: 44.0,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              },
+                                                          .labelSmallFamily),
                                             ),
-                                          ),
-                                          Align(
-                                            alignment: const AlignmentDirectional(
-                                                -1.0, -1.0),
-                                            child: Container(
+                                        minFontSize: 10.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          );
+                        } else {
+                          return Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 4.0, 12.0, 4.0),
+                                child: SizedBox(
+                                  width: 54.0,
+                                  height: 44.0,
+                                  child: Stack(
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            const AlignmentDirectional(1.0, 1.0),
+                                        child: FutureBuilder<UsersRecord>(
+                                          future: UsersRecord.getDocumentOnce(
+                                              widget
+                                                  .chatRef!.users
+                                                  .where((e) =>
+                                                      e != currentUserReference)
+                                                  .toList()
+                                                  .last),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50.0,
+                                                  height: 50.0,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            final secondUserUsersRecord =
+                                                snapshot.data!;
+                                            return Container(
                                               width: 32.0,
                                               height: 32.0,
                                               decoration: BoxDecoration(
@@ -365,9 +296,14 @@ class _Chat2DetailsWidgetState extends State<Chat2DetailsWidget> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           8.0),
-                                                  child: Image.network(
-                                                    valueOrDefault<String>(
-                                                      conditionalBuilderUsersRecord
+                                                  child: CachedNetworkImage(
+                                                    fadeInDuration: const Duration(
+                                                        milliseconds: 300),
+                                                    fadeOutDuration: const Duration(
+                                                        milliseconds: 300),
+                                                    imageUrl:
+                                                        valueOrDefault<String>(
+                                                      secondUserUsersRecord
                                                           .photoUrl,
                                                       'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/teams/GzvajSxrHvi1zwJQsfLk/assets/tjm1k7ywi5dr/@3xlogoMark_outlineOnWhite.png',
                                                     ),
@@ -377,136 +313,168 @@ class _Chat2DetailsWidgetState extends State<Chat2DetailsWidget> {
                                                   ),
                                                 ),
                                               ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment:
+                                            const AlignmentDirectional(-1.0, -1.0),
+                                        child: Container(
+                                          width: 32.0,
+                                          height: 32.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .accent1,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            shape: BoxShape.rectangle,
+                                            border: Border.all(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              width: 2.0,
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Group Chat',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyLargeFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts: GoogleFonts
-                                                        .asMap()
-                                                    .containsKey(
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyLargeFamily),
-                                              ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
-                                          child: Text(
-                                            '${valueOrDefault<String>(
-                                              widget.chatRef?.users.length
-                                                  .toString(),
-                                              '2',
-                                            )} members',
-                                            style: FlutterFlowTheme.of(context)
-                                                .labelSmall
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .labelSmallFamily,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelSmallFamily),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(2.0),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.network(
+                                                valueOrDefault<String>(
+                                                  conditionalBuilderUsersRecord
+                                                      .photoUrl,
+                                                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/teams/GzvajSxrHvi1zwJQsfLk/assets/tjm1k7ywi5dr/@3xlogoMark_outlineOnWhite.png',
                                                 ),
+                                                width: 44.0,
+                                                height: 44.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              );
-                            }
-                          },
-                        );
-                      },
-                    ),
-                    actions: [
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 16.0, 8.0),
-                        child: FlutterFlowIconButton(
-                          borderColor: FlutterFlowTheme.of(context).alternate,
-                          borderRadius: 12.0,
-                          borderWidth: 2.0,
-                          buttonSize: 40.0,
-                          fillColor:
-                              FlutterFlowTheme.of(context).primaryBackground,
-                          icon: Icon(
-                            Icons.more_vert,
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            await showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).accent4,
-                              barrierColor: const Color(0x00FFFFFF),
-                              context: context,
-                              builder: (context) {
-                                return WebViewAware(
-                                  child: GestureDetector(
-                                    onTap: () => _model
-                                            .unfocusNode.canRequestFocus
-                                        ? FocusScope.of(context)
-                                            .requestFocus(_model.unfocusNode)
-                                        : FocusScope.of(context).unfocus(),
-                                    child: Padding(
-                                      padding: MediaQuery.viewInsetsOf(context),
-                                      child: ChatDetailsOverlayWidget(
-                                        chatRef: widget.chatRef!,
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Group Chat',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyLarge
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyLargeFamily,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLargeFamily),
+                                          ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 4.0, 0.0, 0.0),
+                                      child: Text(
+                                        '${valueOrDefault<String>(
+                                          widget.chatRef?.users.length
+                                              .toString(),
+                                          '2',
+                                        )} members',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelSmall
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelSmallFamily,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts: GoogleFonts
+                                                      .asMap()
+                                                  .containsKey(
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelSmallFamily),
+                                            ),
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
-                            ).then((value) => safeSetState(() {}));
-                          },
-                        ),
-                      ),
-                    ],
-                    centerTitle: false,
-                    elevation: 0.0,
-                  )
-                : null,
-            body: SafeArea(
-              top: true,
-              child: wrapWithModel(
-                model: _model.chatThreadComponentModel,
-                updateCallback: () => setState(() {}),
-                updateOnChange: true,
-                child: ChatThreadComponentWidget(
-                  chatRef: widget.chatRef,
+                                  ],
+                                ),
+                              ),
+                            ],
+                          );
+                        }
+                      },
+                    );
+                  },
                 ),
-              ),
+                actions: [
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 16.0, 8.0),
+                    child: FlutterFlowIconButton(
+                      borderColor: FlutterFlowTheme.of(context).alternate,
+                      borderRadius: 12.0,
+                      borderWidth: 2.0,
+                      buttonSize: 40.0,
+                      fillColor: FlutterFlowTheme.of(context).primaryBackground,
+                      icon: Icon(
+                        Icons.more_vert,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        size: 24.0,
+                      ),
+                      onPressed: () async {
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: FlutterFlowTheme.of(context).accent4,
+                          barrierColor: const Color(0x00FFFFFF),
+                          context: context,
+                          builder: (context) {
+                            return WebViewAware(
+                              child: GestureDetector(
+                                onTap: () => _model.unfocusNode.canRequestFocus
+                                    ? FocusScope.of(context)
+                                        .requestFocus(_model.unfocusNode)
+                                    : FocusScope.of(context).unfocus(),
+                                child: Padding(
+                                  padding: MediaQuery.viewInsetsOf(context),
+                                  child: ChatDetailsOverlayWidget(
+                                    chatRef: widget.chatRef!,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ).then((value) => safeSetState(() {}));
+                      },
+                    ),
+                  ),
+                ],
+                centerTitle: false,
+                elevation: 0.0,
+              )
+            : null,
+        body: SafeArea(
+          top: true,
+          child: wrapWithModel(
+            model: _model.chatThreadComponentModel,
+            updateCallback: () => setState(() {}),
+            updateOnChange: true,
+            child: ChatThreadComponentWidget(
+              chatRef: widget.chatRef,
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

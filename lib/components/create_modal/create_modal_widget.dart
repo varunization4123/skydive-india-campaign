@@ -149,6 +149,8 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
                                           fontFamily:
                                               FlutterFlowTheme.of(context)
                                                   .labelMediumFamily,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
                                           letterSpacing: 0.0,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
@@ -230,6 +232,8 @@ class _CreateModalWidgetState extends State<CreateModalWidget> {
                                           fontFamily:
                                               FlutterFlowTheme.of(context)
                                                   .labelMediumFamily,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
                                           letterSpacing: 0.0,
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(

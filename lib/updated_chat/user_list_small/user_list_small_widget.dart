@@ -160,13 +160,14 @@ class _UserListSmallWidgetState extends State<UserListSmallWidget> {
                       child: Text(
                         'ME',
                         textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        style: FlutterFlowTheme.of(context).titleSmall.override(
                               fontFamily:
-                                  FlutterFlowTheme.of(context).bodyMediumFamily,
+                                  FlutterFlowTheme.of(context).titleSmallFamily,
+                              color: FlutterFlowTheme.of(context).primaryText,
                               letterSpacing: 0.0,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
                                   FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily),
+                                      .titleSmallFamily),
                             ),
                       ),
                     ),

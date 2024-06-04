@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "478941670132",
+    "project_id": "skydive-india-campaign-8q80h9",
+    "storage_bucket": "skydive-india-campaign-8q80h9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478941670132:android:2d1f12b84beb67a0984ca1",
+        "android_client_info": {
+          "package_name": "com.flutterflow.skydiveindiacampaign"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyComo9kAAPwXyMNHNclPjY6F4EK1r28Nd4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
